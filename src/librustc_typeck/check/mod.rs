@@ -3458,7 +3458,7 @@ impl<'a, 'gcx, 'tcx> FnCtxt<'a, 'gcx, 'tcx> {
                                               .map(|ident| ident.as_str())
                                               .collect::<Vec<_>>();
 
-            displayable_field_names.sort();
+            displayable_field_names.sort_unstable();
 
             let truncated_fields_error = if len <= 3 {
                 "".to_string()

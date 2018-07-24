@@ -88,7 +88,7 @@ impl<'a, 'gcx, 'tcx> FnCtxt<'a, 'gcx, 'tcx> {
 
         let report_candidates = |err: &mut DiagnosticBuilder, mut sources: Vec<CandidateSource>| {
 
-            sources.sort();
+            sources.sort_unstable();
             sources.dedup();
             // Dynamic limit to avoid hiding just one candidate, which is silly.
             let limit = if sources.len() == 5 { 5 } else { 4 };
@@ -538,7 +538,7 @@ impl<'a, 'gcx, 'tcx> FnCtxt<'a, 'gcx, 'tcx> {
                             valid_out_of_scope_traits: Vec<DefId>) -> bool {
         if !valid_out_of_scope_traits.is_empty() {
             let mut candidates = valid_out_of_scope_traits;
-            candidates.sort();
+            candidates.sort_unstable();
             candidates.dedup();
             err.help("items from traits can only be used if the trait is in scope");
             let msg = format!("the following {traits_are} implemented but not in scope, \
@@ -598,7 +598,7 @@ impl<'a, 'gcx, 'tcx> FnCtxt<'a, 'gcx, 'tcx> {
 
         if !candidates.is_empty() {
             // sort from most relevant to least relevant
-            candidates.sort_by(|a, b| a.cmp(b).reverse());
+            candidates.sort_unstable_by(|a, b| a.cmp(b).reverse());
             candidates.dedup();
 
             // FIXME #21673 this help message could be tuned to the case

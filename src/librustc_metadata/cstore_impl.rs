@@ -356,7 +356,7 @@ pub fn provide<'tcx>(providers: &mut Providers<'tcx>) {
             // we believe that libstd is consistently assigned crate
             // num 1, so it should be enough to resolve #46112.
             let mut crates: Vec<CrateNum> = (*tcx.crates()).clone();
-            crates.sort();
+            crates.sort_unstable();
 
             for &cnum in crates.iter() {
                 // Ignore crates without a corresponding local `extern crate` item.

@@ -172,7 +172,7 @@ pub fn check_crate(resolver: &mut Resolver, krate: &ast::Crate) {
     for (id, spans) in &visitor.unused_imports {
         let len = spans.len();
         let mut spans = spans.values().map(|s| *s).collect::<Vec<Span>>();
-        spans.sort();
+        spans.sort_unstable();
         let ms = MultiSpan::from_spans(spans.clone());
         let mut span_snippets = spans.iter()
             .filter_map(|s| {
@@ -181,7 +181,7 @@ pub fn check_crate(resolver: &mut Resolver, krate: &ast::Crate) {
                     _ => None,
                 }
             }).collect::<Vec<String>>();
-        span_snippets.sort();
+        span_snippets.sort_unstable();
         let msg = format!("unused import{}{}",
                           if len > 1 { "s" } else { "" },
                           if span_snippets.len() > 0 {

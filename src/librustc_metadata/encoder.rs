@@ -1438,7 +1438,7 @@ impl<'a, 'b: 'a, 'tcx: 'b> IsolatedEncoder<'a, 'b, 'tcx> {
             })
             .collect::<Vec<_>>();
 
-        deps.sort_by_key(|&(cnum, _)| cnum);
+        deps.sort_unstable_by_key(|&(cnum, _)| cnum);
 
         {
             // Sanity-check the crate numbers

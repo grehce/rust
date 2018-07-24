@@ -288,7 +288,7 @@ impl<'a, 'tcx> LayoutCx<'tcx, TyCtxt<'a, 'tcx, 'tcx>> {
                 match kind {
                     StructKind::AlwaysSized |
                     StructKind::MaybeUnsized => {
-                        optimizing.sort_by_key(|&x| {
+                        optimizing.sort_unstable_by_key(|&x| {
                             // Place ZSTs first to avoid "interesting offsets",
                             // especially with only one or two non-ZST fields.
                             let f = &fields[x as usize];
@@ -296,7 +296,7 @@ impl<'a, 'tcx> LayoutCx<'tcx, TyCtxt<'a, 'tcx, 'tcx>> {
                         });
                     }
                     StructKind::Prefixed(..) => {
-                        optimizing.sort_by_key(|&x| field_align(&fields[x as usize]));
+                        optimizing.sort_unstable_by_key(|&x| field_align(&fields[x as usize]));
                     }
                 }
             }

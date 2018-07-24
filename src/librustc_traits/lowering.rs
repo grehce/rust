@@ -527,7 +527,7 @@ impl<'a, 'tcx> ClauseDumper<'a, 'tcx> {
                     })
                     .collect();
 
-                strings.sort();
+                strings.sort_unstable();
 
                 for string in strings {
                     err.note(&string);

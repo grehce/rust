@@ -568,8 +568,8 @@ impl<'cx, 'gcx, 'tcx> LexicalResolver<'cx, 'gcx, 'tcx> {
                 _ => 2,
             }
         }
-        lower_bounds.sort_by_key(region_order_key);
-        upper_bounds.sort_by_key(region_order_key);
+        lower_bounds.sort_unstable_by_key(region_order_key);
+        upper_bounds.sort_unstable_by_key(region_order_key);
 
         for lower_bound in &lower_bounds {
             for upper_bound in &upper_bounds {

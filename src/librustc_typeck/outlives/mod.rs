@@ -61,7 +61,7 @@ fn inferred_outlives_of<'a, 'tcx>(
                             err => bug!("unexpected predicate {:?}", err),
                         })
                         .collect();
-                    pred.sort();
+                    pred.sort_unstable();
 
                     let span = tcx.def_span(item_def_id);
                     let mut err = tcx.sess.struct_span_err(span, "rustc_outlives");

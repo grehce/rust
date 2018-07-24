@@ -2401,7 +2401,7 @@ mod dep_tracking {
             impl DepTrackingHash for Vec<$t> {
                 fn hash(&self, hasher: &mut DefaultHasher, error_format: ErrorOutputType) {
                     let mut elems: Vec<&$t> = self.iter().collect();
-                    elems.sort();
+                    elems.sort_unstable();
                     Hash::hash(&elems.len(), hasher);
                     for (index, elem) in elems.iter().enumerate() {
                         Hash::hash(&index, hasher);

@@ -192,7 +192,7 @@ impl<'a, 'gcx, 'tcx> Builder<'a, 'gcx, 'tcx> {
             let source_info = self.source_info(span);
 
             let mut otherwise = otherwise;
-            otherwise.sort();
+            otherwise.sort_unstable();
             otherwise.dedup(); // variant switches can introduce duplicate target blocks
             for block in otherwise {
                 self.cfg.terminate(block, source_info, TerminatorKind::Unreachable);
@@ -644,7 +644,7 @@ impl<'a, 'gcx, 'tcx> Builder<'a, 'gcx, 'tcx> {
                              -> BasicBlock
     {
         let source_info = self.source_info(span);
-        otherwise.sort();
+        otherwise.sort_unstable();
         otherwise.dedup(); // variant switches can introduce duplicate target blocks
         if otherwise.len() == 1 {
             otherwise[0]

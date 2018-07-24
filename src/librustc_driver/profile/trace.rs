@@ -208,8 +208,8 @@ pub fn write_counts(count_file: &mut File, counts: &mut HashMap<String,QueryMetr
     for (ref cons, ref qm) in counts.iter() {
         data.push((cons.clone(), qm.count.clone(), qm.dur_total.clone(), qm.dur_self.clone()));
     };
-    data.sort_by(|&(_,_,_,self1),&(_,_,_,self2)|
-                 if self1 > self2 { Ordering::Less } else { Ordering::Greater } );
+    data.sort_unstable_by(|&(_,_,_,self1),&(_,_,_,self2)|
+                          if self1 > self2 { Ordering::Less } else { Ordering::Greater } );
     for (cons, count, dur_total, dur_self) in data {
         write!(count_file, "{}, {}, {}, {}\n",
                cons, count,

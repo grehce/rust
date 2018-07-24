@@ -719,7 +719,7 @@ impl<'o, 'gcx: 'tcx, 'tcx> dyn AstConv<'gcx, 'tcx>+'o {
         }
 
         // Dedup auto traits so that `dyn Trait + Send + Send` is the same as `dyn Trait + Send`.
-        auto_traits.sort();
+        auto_traits.sort_unstable();
         auto_traits.dedup();
 
         // skip_binder is okay, because the predicates are re-bound.
@@ -729,7 +729,7 @@ impl<'o, 'gcx: 'tcx, 'tcx> dyn AstConv<'gcx, 'tcx>+'o {
             .chain(existential_projections
                    .map(|x| ty::ExistentialPredicate::Projection(*x.skip_binder())))
             .collect::<AccumulateVec<[_; 8]>>();
-        v.sort_by(|a, b| a.stable_cmp(tcx, b));
+        v.sort_unstable_by(|a, b| a.stable_cmp(tcx, b));
         let existential_predicates = ty::Binder::bind(tcx.mk_existential_predicates(v.into_iter()));
 
 

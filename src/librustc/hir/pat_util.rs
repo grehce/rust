@@ -157,7 +157,7 @@ impl hir::Pat {
             }
             true
         });
-        variants.sort();
+        variants.sort_unstable();
         variants.dedup();
         variants
     }
