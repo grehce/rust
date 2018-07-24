@@ -196,7 +196,7 @@ impl EmitterWriter {
                         line_index,
                         annotations: vec![ann],
                     });
-                    slot.lines.sort();
+                    slot.lines.sort_unstable();
                     return;
                 }
             }
@@ -265,7 +265,7 @@ impl EmitterWriter {
         }
 
         // Find overlapping multiline annotations, put them at different depths
-        multiline_annotations.sort_by(|a, b| {
+        multiline_annotations.sort_unstable_by(|a, b| {
             (a.1.line_start, a.1.line_end).cmp(&(b.1.line_start, b.1.line_end))
         });
         for item in multiline_annotations.clone() {
@@ -403,7 +403,7 @@ impl EmitterWriter {
         // otherwise the lines would end up needing to go over a message.
 
         let mut annotations = line.annotations.clone();
-        annotations.sort_by(|a,b| b.start_col.cmp(&a.start_col));
+        annotations.sort_unstable_by(|a,b| b.start_col.cmp(&a.start_col));
 
         // First, figure out where each label will be positioned.
         //
@@ -681,7 +681,7 @@ impl EmitterWriter {
         //   | |  |
         //   | |  something about `foo`
         //   | something about `fn foo()`
-        annotations_position.sort_by(|a, b| {
+        annotations_position.sort_unstable_by(|a, b| {
             // Decreasing order
             a.1.len().cmp(&b.1.len()).reverse()
         });

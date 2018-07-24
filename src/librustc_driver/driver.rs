@@ -1003,7 +1003,7 @@ where
             .iter()
             .cloned()
             .collect();
-        missing_fragment_specifiers.sort();
+        missing_fragment_specifiers.sort_unstable();
         for span in missing_fragment_specifiers {
             let lint = lint::builtin::MISSING_FRAGMENT_SPECIFIER;
             let msg = "missing fragment specifier";
@@ -1530,7 +1530,7 @@ pub fn collect_crate_types(session: &Session, attrs: &[ast::Attribute]) -> Vec<c
                 session,
             ));
         }
-        base.sort();
+        base.sort_unstable();
         base.dedup();
     }
 
@@ -1562,7 +1562,7 @@ pub fn compute_crate_disambiguator(session: &Session) -> CrateDisambiguator {
     let mut metadata = session.opts.cg.metadata.clone();
     // We don't want the crate_disambiguator to dependent on the order
     // -C metadata arguments, so sort them:
-    metadata.sort();
+    metadata.sort_unstable();
     // Every distinct -C metadata value is only incorporated once:
     metadata.dedup();
 

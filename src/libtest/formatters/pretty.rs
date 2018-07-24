@@ -113,7 +113,7 @@ impl<T: Write> PrettyFormatter<T> {
         }
 
         self.write_plain("\nsuccesses:\n")?;
-        successes.sort();
+        successes.sort_unstable();
         for name in &successes {
             self.write_plain(&format!("    {}\n", name))?;
         }
@@ -139,7 +139,7 @@ impl<T: Write> PrettyFormatter<T> {
         }
 
         self.write_plain("\nfailures:\n")?;
-        failures.sort();
+        failures.sort_unstable();
         for name in &failures {
             self.write_plain(&format!("    {}\n", name))?;
         }

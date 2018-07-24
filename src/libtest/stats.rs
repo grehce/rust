@@ -30,7 +30,7 @@ fn local_cmp(x: f64, y: f64) -> Ordering {
 }
 
 fn local_sort(v: &mut [f64]) {
-    v.sort_by(|x: &f64, y: &f64| local_cmp(*x, *y));
+    v.sort_unstable_by(|x: &f64, y: &f64| local_cmp(*x, *y));
 }
 
 /// Trait that provides simple descriptive statistics on a univariate set of numeric samples.

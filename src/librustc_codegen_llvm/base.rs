@@ -925,7 +925,7 @@ pub fn codegen_crate<'a, 'tcx>(tcx: TyCtxt<'a, 'tcx, 'tcx>,
         println!("n_inlines: {}", all_stats.n_inlines);
         println!("n_closures: {}", all_stats.n_closures);
         println!("fn stats:");
-        all_stats.fn_stats.sort_by_key(|&(_, insns)| insns);
+        all_stats.fn_stats.sort_unstable_by_key(|&(_, insns)| insns);
         for &(ref name, insns) in all_stats.fn_stats.iter() {
             println!("{} insns, {}", insns, *name);
         }
@@ -1037,7 +1037,7 @@ fn collect_and_partition_mono_items<'a, 'tcx>(
                 output.push_str(" @@");
                 let mut empty = Vec::new();
                 let cgus = item_to_cgus.get_mut(i).unwrap_or(&mut empty);
-                cgus.as_mut_slice().sort_by_key(|&(ref name, _)| name.clone());
+                cgus.as_mut_slice().sort_unstable_by_key(|&(ref name, _)| name.clone());
                 cgus.dedup();
                 for &(ref cgu_name, (linkage, _)) in cgus.iter() {
                     output.push_str(" ");
@@ -1065,7 +1065,7 @@ fn collect_and_partition_mono_items<'a, 'tcx>(
             })
             .collect();
 
-        item_keys.sort();
+        item_keys.sort_unstable();
 
         for item in item_keys {
             println!("MONO_ITEM {}", item);

@@ -1342,7 +1342,7 @@ pub fn filter_tests(opts: &TestOpts, tests: Vec<TestDescAndFn>) -> Vec<TestDescA
     };
 
     // Sort the tests alphabetically
-    filtered.sort_by(|t1, t2| t1.desc.name.as_slice().cmp(t2.desc.name.as_slice()));
+    filtered.sort_unstable_by(|t1, t2| t1.desc.name.as_slice().cmp(t2.desc.name.as_slice()));
 
     filtered
 }

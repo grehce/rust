@@ -324,7 +324,7 @@ impl<'a, 'gcx, 'tcx> MirBorrowckCtxt<'a, 'gcx, 'tcx> {
                         }
                     }
 
-                    binds_to.sort();
+                    binds_to.sort_unstable();
                     binds_to.dedup();
                     for local in binds_to {
                         let bind_to = &self.mir.local_decls[local];
@@ -344,7 +344,7 @@ impl<'a, 'gcx, 'tcx> MirBorrowckCtxt<'a, 'gcx, 'tcx> {
             GroupedMoveError::MovesFromPattern { mut binds_to, .. } => {
                 // Suggest ref, since there might be a move in
                 // another match arm
-                binds_to.sort();
+                binds_to.sort_unstable();
                 binds_to.dedup();
                 for local in binds_to {
                     let bind_to = &self.mir.local_decls[local];

@@ -127,7 +127,7 @@ impl TimeGraph {
         let mut threads: Vec<PerThread> =
             table.values().map(|data| data.clone()).collect();
 
-        threads.sort_by_key(|timeline| timeline.timings[0].start);
+        threads.sort_unstable_by_key(|timeline| timeline.timings[0].start);
 
         let earliest_instant = threads[0].timings[0].start;
         let latest_instant = threads.iter()

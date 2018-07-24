@@ -102,7 +102,7 @@ pub fn resolve_interior<'a, 'gcx, 'tcx>(fcx: &'a FnCtxt<'a, 'gcx, 'tcx>,
     let mut types: Vec<_> = visitor.types.drain().collect();
 
     // Sort types by insertion order
-    types.sort_by_key(|t| t.1);
+    types.sort_unstable_by_key(|t| t.1);
 
     // Extract type components
     let type_list = fcx.tcx.mk_type_list(types.into_iter().map(|t| t.0));

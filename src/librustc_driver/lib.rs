@@ -1051,7 +1051,7 @@ impl RustcDefaultCalls {
             match *req {
                 TargetList => {
                     let mut targets = rustc_target::spec::get_targets().collect::<Vec<String>>();
-                    targets.sort();
+                    targets.sort_unstable();
                     println!("{}", targets.join("\n"));
                 },
                 Sysroot => println!("{}", sess.sysroot().display()),
@@ -1117,7 +1117,7 @@ impl RustcDefaultCalls {
                         });
                     }
 
-                    cfgs.sort();
+                    cfgs.sort_unstable();
                     for cfg in cfgs {
                         println!("{}", cfg);
                     }
@@ -1229,8 +1229,8 @@ Available lint options:
     fn sort_lint_groups(lints: Vec<(&'static str, Vec<lint::LintId>, bool)>)
                         -> Vec<(&'static str, Vec<lint::LintId>)> {
         let mut lints: Vec<_> = lints.into_iter().map(|(x, y, _)| (x, y)).collect();
-        lints.sort_by(|&(x, _): &(&'static str, Vec<lint::LintId>),
-                       &(y, _): &(&'static str, Vec<lint::LintId>)| {
+        lints.sort_unstable_by(|&(x, _): &(&'static str, Vec<lint::LintId>),
+                                &(y, _): &(&'static str, Vec<lint::LintId>)| {
             x.cmp(y)
         });
         lints

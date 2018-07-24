@@ -155,7 +155,7 @@ impl CodeSuggestion {
         self.substitutions.iter().cloned().map(|mut substitution| {
             // Assumption: all spans are in the same file, and all spans
             // are disjoint. Sort in ascending order.
-            substitution.parts.sort_by_key(|part| part.span.lo());
+            substitution.parts.sort_unstable_by_key(|part| part.span.lo());
 
             // Find the bounding span.
             let lo = substitution.parts.iter().map(|part| part.span.lo()).min().unwrap();
@@ -618,7 +618,7 @@ impl Handler {
                                              })
                                              .collect::<Vec<_>>();
             if !error_codes.is_empty() {
-                error_codes.sort();
+                error_codes.sort_unstable();
                 if error_codes.len() > 1 {
                     let limit = if error_codes.len() > 9 { 9 } else { error_codes.len() };
                     self.failure(&format!("Some errors occurred: {}{}",

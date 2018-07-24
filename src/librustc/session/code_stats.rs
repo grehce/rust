@@ -100,7 +100,7 @@ impl CodeStats {
 
         // Primary sort: large-to-small.
         // Secondary sort: description (dictionary order)
-        sorted.sort_by(|info1, info2| {
+        sorted.sort_unstable_by(|info1, info2| {
             // (reversing cmp order to get large-to-small ordering)
             match info2.overall_size.cmp(&info1.overall_size) {
                 Ordering::Equal => info1.type_description.cmp(&info2.type_description),
@@ -151,7 +151,7 @@ impl CodeStats {
 
                 // We want to print fields by increasing offset.
                 let mut fields = fields.clone();
-                fields.sort_by_key(|f| f.offset);
+                fields.sort_unstable_by_key(|f| f.offset);
 
                 for field in fields.iter() {
                     let FieldInfo { ref name, offset, size, align } = *field;

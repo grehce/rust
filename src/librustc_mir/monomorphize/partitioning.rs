@@ -262,7 +262,7 @@ pub fn partition<'a, 'tcx, I>(tcx: TyCtxt<'a, 'tcx, 'tcx>,
         internalization_candidates: _,
     } = post_inlining;
 
-    result.sort_by(|cgu1, cgu2| {
+    result.sort_unstable_by(|cgu1, cgu2| {
         cgu1.name().cmp(cgu2.name())
     });
 
@@ -502,7 +502,7 @@ fn merge_codegen_units<'tcx>(initial_partitioning: &mut PreInliningPartitioning<
     // smallest into each other) we're sure to start off with a deterministic
     // order (sorted by name). This'll mean that if two cgus have the same size
     // the stable sort below will keep everything nice and deterministic.
-    codegen_units.sort_by_key(|cgu| cgu.name().clone());
+    codegen_units.sort_unstable_by_key(|cgu| cgu.name().clone());
 
     // Merge the two smallest codegen units until the target size is reached.
     while codegen_units.len() > target_cgu_count {

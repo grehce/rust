@@ -1923,7 +1923,7 @@ fn start_executing_work(tcx: TyCtxt,
         // Regardless of what order these modules completed in, report them to
         // the backend in the same order every time to ensure that we're handing
         // out deterministic results.
-        compiled_modules.sort_by(|a, b| a.name.cmp(&b.name));
+        compiled_modules.sort_unstable_by(|a, b| a.name.cmp(&b.name));
 
         let compiled_metadata_module = compiled_metadata_module
             .expect("Metadata module not compiled?");

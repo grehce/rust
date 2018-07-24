@@ -408,7 +408,7 @@ impl<'a, 'mir, 'tcx, M: Machine<'mir, 'tcx>> Memory<'a, 'mir, 'tcx, M> {
             return;
         }
         use std::fmt::Write;
-        allocs.sort();
+        allocs.sort_unstable();
         allocs.dedup();
         let mut allocs_to_print = VecDeque::from(allocs);
         let mut allocs_seen = FxHashSet::default();

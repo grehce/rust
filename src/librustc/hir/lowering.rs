@@ -4803,6 +4803,6 @@ fn body_ids(bodies: &BTreeMap<hir::BodyId, hir::Body>) -> Vec<hir::BodyId> {
     // Sorting by span ensures that we get things in order within a
     // file, and also puts the files in a sensible order.
     let mut body_ids: Vec<_> = bodies.keys().cloned().collect();
-    body_ids.sort_by_key(|b| bodies[b].value.span);
+    body_ids.sort_unstable_by_key(|b| bodies[b].value.span);
     body_ids
 }

@@ -2619,14 +2619,14 @@ impl<'a> Resolver<'a> {
             }
         }
         let mut missing_vars = missing_vars.iter().collect::<Vec<_>>();
-        missing_vars.sort();
+        missing_vars.sort_unstable();
         for (_, v) in missing_vars {
             resolve_error(self,
                           *v.origin.iter().next().unwrap(),
                           ResolutionError::VariableNotBoundInPattern(v));
         }
         let mut inconsistent_vars = inconsistent_vars.iter().collect::<Vec<_>>();
-        inconsistent_vars.sort();
+        inconsistent_vars.sort_unstable();
         for (name, v) in inconsistent_vars {
             resolve_error(self, v.0, ResolutionError::VariableBoundWithDifferentMode(*name, v.1));
         }
@@ -2934,7 +2934,7 @@ impl<'a> Resolver<'a> {
                     this.lookup_import_candidates(ident.name, ns, is_enum_variant);
                 let mut enum_candidates = enum_candidates.iter()
                     .map(|suggestion| import_candidate_to_paths(&suggestion)).collect::<Vec<_>>();
-                enum_candidates.sort();
+                enum_candidates.sort_unstable();
                 for (sp, variant_path, enum_path) in enum_candidates {
                     if sp.is_dummy() {
                         let msg = format!("there is an enum variant `{}`, \
@@ -4610,7 +4610,7 @@ fn show_candidates(err: &mut DiagnosticBuilder,
     // by iterating through a hash map, so make sure they are ordered:
     let mut path_strings: Vec<_> =
         candidates.into_iter().map(|c| path_names_to_string(&c.path)).collect();
-    path_strings.sort();
+    path_strings.sort_unstable();
 
     let better = if better { "better " } else { "" };
     let msg_diff = match path_strings.len() {

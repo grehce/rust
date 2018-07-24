@@ -501,7 +501,7 @@ pub fn check_unsafety<'a, 'tcx>(tcx: TyCtxt<'a, 'tcx, 'tcx>, def_id: DefId) {
     }
 
     let mut unsafe_blocks: Vec<_> = unsafe_blocks.into_iter().collect();
-    unsafe_blocks.sort();
+    unsafe_blocks.sort_unstable();
     let used_unsafe: FxHashSet<_> = unsafe_blocks.iter()
         .flat_map(|&&(id, used)| if used { Some(id) } else { None })
         .collect();
